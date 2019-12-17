@@ -1,5 +1,6 @@
 /***** HisiPHP By http://www.HisiPHP.com *****/
 layui.define(['element', 'form', 'table', 'md5'], function(exports) {
+    
     var $ = layui.jquery,element = layui.element, 
         layer = layui.layer, 
         form = layui.form, 
@@ -10,7 +11,7 @@ layui.define(['element', 'form', 'table', 'md5'], function(exports) {
         d.ie && d.ie < 10 && layer.alert("IE" + d.ie + "下体验不佳，推荐使用：Chrome/Firefox/Edge/极速模式");
     }
     checkBrowser();
-
+  
     var lockscreen = function() {
         if ($('.lock-screen', parent.document)[0]) return;
         document.oncontextmenu=new Function("event.returnValue=false;");
@@ -18,12 +19,27 @@ layui.define(['element', 'form', 'table', 'md5'], function(exports) {
         layer.open({
             title: false,
             type: 1,
-            content: '<div class="lock-screen"><input type="password" id="unlockedPwd" class="layui-input" placeholder="请输入登录密码解锁..." autocomplete="on"><button id="unlocked" class="layui-btn">解锁</button></div>',
+            content: '<div class="lock-screen"><input type="password" id="unlockedPwd" class="layui-input search" placeholder="请输入登录密码解锁..." autocomplete="on"><button id="unlocked" class="layui-btn">解锁</button></div>',
             closeBtn: 0,
             shade: 0.95,
             offset: '350px'
         });
-
+         $(".search").keydown(function(event) {  
+             if (event.keyCode == 13) { 
+                var pwd = $('#unlockedPwd').val();
+                if (pwd == '') {
+                    return false;
+                }
+                $.post(ADMIN_PATH+'/system/publics/unlocked', {password:md5.exec(pwd)}, function(res) {
+                    if (res.code == 1) {
+                        window.sessionStorage.setItem("lockscreen", false);
+                        layer.closeAll();
+                    } else {
+                        $('#unlockedPwd').attr('placeholder', res.msg).val('');
+                    }
+                });
+             }  
+         })
         $('#unlocked').click(function() {
             var pwd = $('#unlockedPwd').val();
             if (pwd == '') {
@@ -252,12 +268,15 @@ layui.define(['element', 'form', 'table', 'md5'], function(exports) {
      * @attr confirm 确认提示
      */
     form.on('switch(switchStatus)', function(data) {
-        var that = $(this), status = 0, func = function() {
+        var that = $(this), status = 2, func = function() {
+            // console.log(status);
             $.get(that.attr('data-href'), {val:status}, function(res) {
                 layer.msg(res.msg);
                 if (res.code == 0) {
                     that.trigger('click');
                     form.render('checkbox');
+                }else{
+                    window.location.reload();
                 }
             });
         };
@@ -287,11 +306,13 @@ layui.define(['element', 'form', 'table', 'md5'], function(exports) {
      * @attr data-form 表单DOM
      */
     form.on('submit(formSubmit)', function(data) {
+        
         var _form = '', 
             that = $(this), 
             text = that.text(),
             opt = {},
             def = {pop: false, refresh: true, jump: false, callback: null, time: 3000};
+
         if ($(this).attr('data-form')) {
             _form = $(that.attr('data-form'));
         } else {
@@ -325,21 +346,30 @@ layui.define(['element', 'form', 'table', 'md5'], function(exports) {
                         that.removeClass('layui-btn-danger').addClass('layui-btn-normal').text(text);
                     }, opt.time);
                 } else {
+
                     that.addClass('layui-btn-normal').text(res.msg);
                     setTimeout(function() {
                         that.text(text).prop('disabled', false);
+                        console.log(text);
                         if (opt.callback) {
                             opt.callback(that, res);
                         }
+
                         if (opt.pop == true) {
                             if (opt.refresh == true) {
-                                parent.location.reload();
+                                if(opt.res == true){
+                                    parent.location.reload();
+                                }else{
+                                   location.href = res.url; 
+                                }
+                                    
                             } else if (opt.jump == true && res.url != '') {
                                 parent.location.href = res.url;
                             }
                             parent.layui.layer.closeAll();
                         } else if (opt.refresh == true) {
                             if (res.url != '') {
+                                
                                 location.href = res.url;
                             } else {
                                 history.back(-1);
@@ -376,7 +406,27 @@ layui.define(['element', 'form', 'table', 'md5'], function(exports) {
         });
         return false;
     });
-
+    /**
+     * 通用TR数据行启用 停用
+     * @attr href或data-href 请求地址
+     * @attr refresh 操作完成后是否自动刷新
+     */
+    $(document).on('click', '.j-tr-status', function() {
+        console.log(22);return false;
+        var that = $(this),
+        href = !that.attr('data-href') ? that.attr('href') : that.attr('data-href');
+        if (!href) {
+            layer.msg('请设置data-href参数');
+            return false;
+        }
+        $.get(href, function(res) {
+            if (res.code == 0) {
+                layer.msg(res.msg);
+            }
+        });
+        layer.close(index);
+        return false;
+    });
     /**
      * ajax请求操作
      * @attr href或data-href 请求地址

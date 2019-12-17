@@ -22,6 +22,7 @@ body{background-color:#f5f5f5;margin:0;padding:0;}
 .pb50 {padding-bottom:50px}
 .w50 {width:50px!important}
 .w100 {width:100px!important}
+.w120 {width:120px!important}
 .w200 {width:200px!important}
 .w300 {width:300px!important}
 .w400 {width:400px!important}
@@ -214,7 +215,7 @@ body{background-color:#f5f5f5;margin:0;padding:0;}
 .edui-body-container img{max-width:100%!important;}
 .hisi-lang .layui-nav-more{display:none;}
 .hisi-search {padding-top:10px;}
-.hisi-search .layui-form-item{display:inline-block;width:24%;padding:0;}
+.hisi-search .layui-form-item{display:inline-block;width:50%;padding:0;}
 .hisi-search .layui-form-label {width:auto;min-width:20%;text-align:right;padding:9px 0px;white-space: nowrap;}
 .hisi-search .layui-form-item .layui-input-inline {padding:0;margin:0; width:65%;flex:1 1;}
 .hisi-search .hisi-search-btn {text-align:left;}
