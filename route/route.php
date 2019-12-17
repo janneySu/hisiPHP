@@ -10,4 +10,8 @@
 // +----------------------------------------------------------------------
 
 route::get('/', 'index/Index/index');
-route::get('/test', 'index/Index/test');
+
+// index模块
+route::group('/', function () {
+    route::get('test', 'index/Index/test');
+});
