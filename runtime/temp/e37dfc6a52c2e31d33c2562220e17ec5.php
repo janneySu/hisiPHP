@@ -1,4 +1,4 @@
-<?php /*a:6:{s:58:"D:\myself\hisiPHP\application\system\view\index\index.html";i:1576550683;s:53:"D:\myself\hisiPHP\application\system\view\layout.html";i:1576550683;s:59:"D:\myself\hisiPHP\application\system\view\block\header.html";i:1576550683;s:57:"D:\myself\hisiPHP\application\system\view\block\menu.html";i:1576550683;s:58:"D:\myself\hisiPHP\application\system\view\block\layui.html";i:1576550683;s:59:"D:\myself\hisiPHP\application\system\view\block\footer.html";i:1576550683;}*/ ?>
+<?php /*a:6:{s:58:"D:\myself\hisiPHP\application\system\view\index\index.html";i:1576567589;s:53:"D:\myself\hisiPHP\application\system\view\layout.html";i:1576550683;s:59:"D:\myself\hisiPHP\application\system\view\block\header.html";i:1576550683;s:57:"D:\myself\hisiPHP\application\system\view\block\menu.html";i:1576567775;s:58:"D:\myself\hisiPHP\application\system\view\block\layui.html";i:1576550683;s:59:"D:\myself\hisiPHP\application\system\view\block\footer.html";i:1576550683;}*/ ?>
 <?php if(input('param.hisi_iframe') || cookie('hisi_iframe')): ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +38,7 @@ $ca = strtolower(request()->controller().'/'.request()->action());
  ?>
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" style="z-index:999!important;">
-        <div class="fl header-logo">后台管理中心</div>
+        <div class="fl header-logo">后台内容管理中心</div>
         <div class="fl header-fold"><a href="javascript:;" title="打开/关闭左侧导航" class="aicon ai-shouqicaidan" id="foldSwitch"></a></div>
         <ul class="layui-nav fl nobg main-nav">
             <?php if(is_array($hisiMenus) || $hisiMenus instanceof \think\Collection || $hisiMenus instanceof \think\Paginator): $i = 0; $__LIST__ = $hisiMenus;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if(($hisiCurParents['pid'] == $vo['id'] and $ca != 'plugins/run') or ($ca == 'plugins/run' and $vo['id'] == 3)): ?>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /runtime/*
 /backup/*
 /public/theme/*
@@ -11,3 +12,6 @@ install.lock
 *.log
 .DS_Store
 Thumbs.db
+=======
+/runtime
+>>>>>>> 32a4557d2f310cabdadbe403cfcd64c7fe83f622

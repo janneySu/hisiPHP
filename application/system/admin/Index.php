@@ -53,21 +53,21 @@ class Index extends Admin
      */
     public function clear()
     {
-        $path   = Env::get('runtime_path');
-        $cache  = $this->request->param('cache/d', 0);
-        $log    = $this->request->param('log/d', 0);
-        $temp   = $this->request->param('temp/d', 0);
+        $path  = Env::get('runtime_path');
+        $cache = $this->request->param('cache/d', 0);
+        $log   = $this->request->param('log/d', 0);
+        $temp  = $this->request->param('temp/d', 0);
 
         if ($cache == 1) {
-            Dir::delDir($path.'cache');
+            Dir::delDir($path . 'cache');
         }
 
         if ($temp == 1) {
-            Dir::delDir($path.'temp');
+            Dir::delDir($path . 'temp');
         }
 
         if ($log == 1) {
-            Dir::delDir($path.'log');
+            Dir::delDir($path . 'log');
         }
 
         return $this->success('任务执行成功');

@@ -8,3 +8,10 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
+
+route::get('/', 'index/Index/index');
+
+// index模块
+route::group('/', function () {
+    route::get('test', 'index/Index/test');
+});
