@@ -1,4 +1,4 @@
-<?php /*a:1:{s:61:"D:\myself\hisiPHP\plugins/hisiphp/view/widget/systeminfo.html";i:1576550683;}*/ ?>
+<?php /*a:1:{s:61:"D:\myself\hisiPHP\plugins/hisiphp/view/widget/systeminfo.html";i:1576576015;}*/ ?>
 <table class="layui-table" lay-skin="line">
         <colgroup>
             <col width="160">

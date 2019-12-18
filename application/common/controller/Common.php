@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 
 namespace app\common\controller;
-use View;
+
 use think\Controller;
 
 /**
@@ -19,7 +19,8 @@ use think\Controller;
  */
 class Common extends Controller
 {
-    protected function initialize() {
+    protected function initialize()
+    {
 
     }
 
@@ -37,11 +38,11 @@ class Common extends Controller
     final protected function fetch($template = '', $vars = [], $replace = [], $config = [], $renderContent = false)
     {
         if (defined('IS_PLUGINS')) {
-            return self::pluginsFetch($template , $vars , $replace , $config , $renderContent);
+            return self::pluginsFetch($template, $vars, $replace, $config, $renderContent);
         }
-        return parent::fetch($template , $vars , $replace , $config , $renderContent);
+        return parent::fetch($template, $vars, $replace, $config, $renderContent);
     }
-    
+
     /**
      * 渲染插件模板
      * @param string    $template 模板文件名或者内容
@@ -59,18 +60,18 @@ class Common extends Controller
         $controller = $_GET['_c'];
         $action     = $_GET['_a'];
         if (!$template) {
-            $template = $controller.'/'.parse_name($action);
+            $template = $controller . '/' . parse_name($action);
         } elseif (strpos($template, '/') == false) {
-            $template = $controller.'/'.$template;
-        }
-        
-        if(defined('ENTRANCE') && ENTRANCE == 'admin') {
-            $template = 'admin/'.$template;
-        } else {
-            $template = 'home/'.$template;
+            $template = $controller . '/' . $template;
         }
 
-        $template_path = strtolower("../plugins/{$plugin}/view/{$template}.".config('template.view_suffix'));
+        if (defined('ENTRANCE') && ENTRANCE == 'admin') {
+            $template = 'admin/' . $template;
+        } else {
+            $template = 'home/' . $template;
+        }
+
+        $template_path = strtolower("../plugins/{$plugin}/view/{$template}." . config('template.view_suffix'));
         return parent::fetch($template_path, $vars, $replace, $config, $renderContent);
     }
 }

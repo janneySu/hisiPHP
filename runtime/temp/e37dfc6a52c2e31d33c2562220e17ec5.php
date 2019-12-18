@@ -1,4 +1,4 @@
-<?php /*a:6:{s:58:"D:\myself\hisiPHP\application\system\view\index\index.html";i:1576567589;s:53:"D:\myself\hisiPHP\application\system\view\layout.html";i:1576550683;s:59:"D:\myself\hisiPHP\application\system\view\block\header.html";i:1576550683;s:57:"D:\myself\hisiPHP\application\system\view\block\menu.html";i:1576567775;s:58:"D:\myself\hisiPHP\application\system\view\block\layui.html";i:1576550683;s:59:"D:\myself\hisiPHP\application\system\view\block\footer.html";i:1576550683;}*/ ?>
+<?php /*a:6:{s:58:"D:\myself\hisiPHP\application\system\view\index\index.html";i:1576576015;s:53:"D:\myself\hisiPHP\application\system\view\layout.html";i:1576576015;s:59:"D:\myself\hisiPHP\application\system\view\block\header.html";i:1576576015;s:57:"D:\myself\hisiPHP\application\system\view\block\menu.html";i:1576576015;s:58:"D:\myself\hisiPHP\application\system\view\block\layui.html";i:1576576015;s:59:"D:\myself\hisiPHP\application\system\view\block\footer.html";i:1576576015;}*/ ?>
 <?php if(input('param.hisi_iframe') || cookie('hisi_iframe')): ?>
 <!DOCTYPE html>
 <html>
